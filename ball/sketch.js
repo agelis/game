@@ -5,16 +5,18 @@ var ball;
 var blockshit;
 var ballhit;
 var lostball;
+var funnysound;
 function preload(){
  
   blockshit=loadSound("pop.mp3")
   ballhit=loadSound("h.mp3")
   lostball=loadSound("lauph.mp3")
+  funnysound=loadSound("funny.mp3")
 }
 
 function setup() {
   createCanvas(700,500);
-  
+  funnysound.play();
   for (var i=0; i<10; i++){
    
   //blocks[i]=[];
