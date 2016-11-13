@@ -1,56 +1,78 @@
-
+var blocks=[];
+var balls=[];
+var box1;
+var ball;
+var blockshit;
+var ballhit;
+var lostball;
+function preload(){
+ 
+  blockshit=loadSound("pop.mp3")
+  ballhit=loadSound("h.mp3")
+  lostball=loadSound("lauph.mp3")
+}
 
 function setup() {
-  createCanvas(600,400);
-  ball=new Ball(random(10,width-1),random(10,height-1),5,4,5);
-  ball2=new Ball(random(10,width-1),random(10,height-1),7,4,5); 
+  createCanvas(700,500);
+  
+  for (var i=0; i<10; i++){
    
-   
+  //blocks[i]=[];
+   //for (var j=0;j<10;j++){
+    blocks[i]=new Block(i*78-40,100);
+    
+  // }
+  }
+  
+   box1=new Box(350,400,90,15);
+  
+}
+function mousePressed(){
+ 
+   ball=new Ball(box1.x,box1.y-20,5,4,5);
+   balls.push(ball);
+   ballhit.play();
 }
 
 function draw() {
+
   
-  squear=new Box(40,300,90,15);
   background(0);
-  ball.display();
-  ball.move();
-  //ball2.display();
-  //ball2.move();
-  squear.update();
-  squear.display();
-  if(squear.hits(ball)){
+  for (var i=blocks.length-1;i>0;i--){
+    
+   //for (var t=blocks.length-1;t>0;t--){
+   blocks[i].display();
+   
+   if (blocks[i].hits(balls[i])){
+    
+   blocks.splice(i,1);
    ball.changedirection();
+   blockshit.play();
+   
+   //}
   }
-  if(squear.hits(ball2)){
-   ball2.changedirection();
+}
+  
+  box1.update();
+  box1.display();
+  
+  for (var j=balls.length-1;j>=0;j--){
+   balls[j].display();
+   balls[j].move();
+
+  if(box1.hits(balls[j])){
+   balls[j].changedirection();
+   ballhit.play();
+  } 
+  if (balls[j].lost()){
+   balls.splice(j,1);
+   lostball.play();
   }
   
+  
+ }
+ 
 }
 
-function Box(x,y,wide,height){
- this.x=x;
- this.y=y;
- this.wide=wide;
- this.height=height;
- this.update=function(){
-  this.x=mouseX;
-  this.x=constrain(this.x,0+this.wide/2,width-this.wide/2-1)
- }
- 
- this.hits=function(ball){
-  if(ball.y+ball.r > this.y-this.height/2 && ball.x+ball.r > this.x-this.wide/2 && ball.x+ball.r < this.x+this.wide/2){
-   //if(ball.x+ball.r > this.x-this.wide/2 && ball.x+ball.r < this.x+this.wide/2){
-    return true;
-   }
-   
-  //}
-   return false;
- }
- this.display=function(){
-  rectMode(CENTER);
-  fill(120,13,90)
-  rect(this.x,this.y,this.wide,this.height);
- }
- 
-}
+
 

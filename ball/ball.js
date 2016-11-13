@@ -21,10 +21,18 @@ function Ball(x,y,r,dirx,diry){
   }
  }
  this.changedirection=function(){
-  if(this.x===-1){
+  
   dirx*=1;
-  } else 
   diry*=-1;
+  
+ }
+ this.lost=function(){
+  if (this.y+this.r>=height){
+   return true;
+   }else {
+    return false;
+   }
+  
   
  }
  this.display=function(){
@@ -36,7 +44,7 @@ function Ball(x,y,r,dirx,diry){
   if(this.x >= width-this.r||this.x<=0+this.r){
    dirx *= -1;
    } 
-  if(this.y>=height-this.r||this.y<=0+this.r){
+  if(this.y<=0+this.r){
    diry*=-1;
   } 
    this.x+=dirx;
