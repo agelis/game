@@ -10,6 +10,7 @@ var funnysound;
 var rows;
 var cols;
 var canvas;
+var img;
 function preload(){
  
   blockshit=loadSound("pop.mp3")
@@ -17,11 +18,12 @@ function preload(){
   lostball=loadSound("boo.mp3")
   sound=loadSound("soundtrack.mp3")
   end=loadSound("end.mp3")
+  img=loadImage("images/Lighthouse.jpg")
 }
 
 
 function setup() {
- 
+  
   canvas=createCanvas(700,500);
   canvas.position(270,0)
   sound.play();
@@ -58,7 +60,7 @@ function mousePressed(){
 function draw() {
  
 
-  background(0);
+  background(img);
   
   for (var i=blocks.length-1;i>=0;i--){
     
