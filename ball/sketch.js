@@ -11,6 +11,7 @@ var rows;
 var cols;
 var canvas;
 var img;
+var ballspeed;
 function preload(){
  
   blockshit=loadSound("pop.mp3")
@@ -23,8 +24,22 @@ function preload(){
 
 
 function setup() {
-  
-  canvas=createCanvas(700,500);
+ 
+   start();
+   ballspeed=createSlider(3,10,5);
+   ballspeed.position(550,505);
+   var p=createP("SET THE SPEED OF THE BALL:")
+   p.position(300,490)
+   canvas.mousePressed(play);
+function play(){
+   ball=new Ball(box1.x+52,box1.y-20,5,ballspeed.value(),ballspeed.value());
+   balls.push(ball);
+ } 
+}
+
+
+function start(){
+ canvas=createCanvas(700,500);
   canvas.position(270,0)
   sound.play();
   sound.setVolume(0.9);
@@ -39,21 +54,8 @@ function setup() {
    }
  }
    
-  
    box1=new Box(350,400,90,15);
-   
-
-}
-  
-  
-
-function mousePressed(){
- 
-   ball=new Ball(box1.x+52,box1.y-20,5,4,5);
-   balls.push(ball);
-  
-   
-}
+ }
 
 
 
@@ -77,10 +79,9 @@ function draw() {
      sound.stop(); 
      end.play();
      ball.disappear();
-     setTimeout(setup,3000)
+     setTimeout(start,3000)
   }
-   }
-  
+ }
 }
   
   box1.update();
@@ -99,12 +100,8 @@ function draw() {
    balls.splice(j,1);
    lostball.play();
   }
-  
-  
  }
-
- 
- 
 }
+
 
 
