@@ -3,27 +3,25 @@ function Box(x,y,wide,height){
  this.y=y;
  this.wide=wide;
  this.height=height;
+ this.color=color(random(30,150),random(30,150),random(30,150))
  this.update=function(){
-  this.x=mouseX;
-  this.x=constrain(this.x,0+this.wide/2,width-this.wide/2-1)
+  this.x=mouseX-wide/2;
+  this.x=constrain(this.x,0,width-this.wide-1)
  }
  
-  this.hits=function(){
-  for (var i=0;i<balls.length;i++){
+  this.hits=function(obj){
+  for (var i=0;i<obj.length;i++){
   
-  if(balls[i].y+balls[i].r >= this.y-this.height/2 && balls[i].y-balls[i].r<this.y+this.height/2 && balls[i].x+balls[i].r >= this.x-this.wide/2 && balls[i].x-balls[i].r <= this.x+this.wide/2) {
-   
-    return true;
-    
-    } else{
-  
-   return false;
-    }
- }
+  if(collideRectCircle(this.x,this.y,this.wide,this.height,obj[i].x,obj[i].y,obj[i].r*2)){
+ 
+ return true;}
+ 
+  }
 }
  this.display=function(){
-  rectMode(CENTER);
-  fill(120,13,90)
+  
+  fill(this.color)
+  stroke(255)
   rect(this.x,this.y,this.wide,this.height);
  }
  

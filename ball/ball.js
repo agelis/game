@@ -12,14 +12,7 @@ function Ball(x,y,r,dirx,diry){
    return false;
   }
  }
- this.avoid=function(other){
-  var d=dist(this.x,this.y,other.x,other.y);
-  if(d<=this.r + other.height){
-   return true;
-  } else{
-   return false;
-  }
- }
+ 
  this.changedirection=function(){
   
   dirx*=1;
@@ -36,7 +29,7 @@ function Ball(x,y,r,dirx,diry){
   
  }
  this.display=function(){
-  fill(125,200,200)
+  fill(125,200,200,240)
   ellipse(this.x,this.y,this.r*2,this.r*2);
  }
  this.move=function(){
@@ -49,6 +42,9 @@ function Ball(x,y,r,dirx,diry){
   } 
    this.x+=dirx;
    this.y+=diry;
+}
+this.disappear=function(){
+ balls.splice(0,3);
 }
 }
  
