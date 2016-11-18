@@ -9,6 +9,7 @@ var end;
 var funnysound;
 var rows;
 var cols;
+var canvas;
 function preload(){
  
   blockshit=loadSound("pop.mp3")
@@ -21,7 +22,8 @@ function preload(){
 
 function setup() {
  
-  createCanvas(700,500);
+  canvas=createCanvas(700,500);
+  canvas.position(270,0)
   sound.play();
   sound.setVolume(0.9);
   rows=floor(width/75);
