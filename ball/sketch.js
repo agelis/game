@@ -32,8 +32,10 @@ function setup() {
    p.position(300,490)
    canvas.mousePressed(play);
 function play(){
+ if (balls.length===0){
    ball=new Ball(box1.x+52,box1.y-20,5,ballspeed.value(),ballspeed.value());
    balls.push(ball);
+ }
  } 
 }
 
@@ -57,24 +59,14 @@ function start(){
    box1=new Box(350,400,90,15);
  }
 
-
-
 function draw() {
- 
-
   background(img);
-  
   for (var i=blocks.length-1;i>=0;i--){
-    
-   
-   blocks[i].display();
-  
+    blocks[i].display();
    if (blocks[i].hits(balls)){
-    
-   blocks.splice(i,1);
-  
-   ball.changedirection();
-   blockshit.play();
+    blocks.splice(i,1);
+    ball.changedirection();
+    blockshit.play();
      if (blocks.length===0){
      sound.stop(); 
      end.play();
